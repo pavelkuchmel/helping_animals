@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link href="../../static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet" />
+  <title>Admin page</title>
+</head>
+<body>
+<div class="admin-animals-search-container" id="admin-animals-search-container">
+  <div th:replace="admin-animals-search :: admin-animals-search"></div>
+</div>
+<div th:replace="header :: header"></div>
+<div th:replace="admin-menu :: admin-menu"></div>
+<div class="main-container_animals">
+  <table class="table">
+    <col/>
+    <thead>
+    <tr>
+      <th></th>
+      <th>Кличка</th>
+      <th>Куратор</th>
+      <th>Возраст (мес.)</th>
+      <th>Пол</th>
+      <th>Высота в холке (см)</th>
+      <th>Стер/костр</th>
+      <th>Вакцина</th>
+      <th>Описание</th>
+      <th>Тип</th>
+      <th>Добавлен(а)</th>
+      <th>Сборы</th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="animal : ${animals}">
+      <td><a th:href="*{'/id/' + animal.getId}"><img th:src="*{animal.getPhoto()}" th:alt="animal"></a></td>
+      <td th:text="*{animal.getName()}">...</td>
+      <td th:text="*{animal.getUser().getFirstName() + ' ' + animal.getUser().getLastName()}">...</td>
+      <td th:text="*{animal.getAge()}">...</td>
+      <td th:text="*{animal.getGenderTitle()}">...</td>
+      <td th:text="*{animal.getHeight()}">...</td>
+      <td>
+        <span th:if="${animal.getSterilization()}">Да</span>
+        <span th:unless="${animal.getSterilization()}">Нет</span>
+      </td>
+      <td>
+        <span th:if="${animal.getVaccinated() != null}" th:text="*{animal.getVaccinated()}">Да</span>
+        <span th:unless="${animal.getVaccinated() != null}">Нет</span>
+      </td>
+      <td>
+        <div class="main-container_animals-full-description">
+          <span th:text="*{animal.getDescription()}"></span>
+        </div>
+        <span th:text="*{animal.getDescription().substring(0, 40) + '...'}"></span>
+      </td>
+      <td th:text="*{animal.getAnimalType().getName()}">...</td>
+      <td th:text="*{animal.getCreated()}">...</td>
+      <td>
+        <a th:if="${animal.getIncome() != null}" th:href="@{/admin/donations/(*{animal.getId()})}">Да</a>
+        <span th:unless="${animal.getIncome() != null}">Нет</span>
+      </td>
+      <td></td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div th:replace="footer :: footer"></div>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+</body>
+</html>

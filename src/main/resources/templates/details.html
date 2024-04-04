@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="../static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet" />
+    <title>Details</title>
+</head>
+<body>
+<div th:replace="header :: header"></div>
+<div class="main-container_animals">
+    <table class="table">
+        <thead>
+        <tr>
+            <th colspan="3"><a th:href="*{animal.getPhoto()}" th:target="_blank"><img th:src="*{animal.getPhoto()}" th:alt="animal" width="450px"></a></th>
+            <th th:text="*{animal.getName()}">...</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="*{'Возраст(в месяцах): ' + animal.getAge}">...</td>
+            <td th:text="*{animal.getGenderTitle()}">...</td>
+            <td th:text="*{'Высота в холке: ' + animal.getHeight()}">...</td>
+            <td>
+                <span th:if="${animal.getToiletOutside()}">
+                    <span th:if="${animal.getGender().getName() == 'MALE'}" th:text="'Приучен к туалету'"></span>
+                    <span th:if="${animal.getGender().getName() == 'FEMALE'}" th:text="'Приучена к туалету'"></span>
+                </span>
+                <span th:unless="${animal.getToiletOutside()}">
+                    <span th:if="${animal.getGender().getName() == 'MALE'}" th:text="'Не приучен к туалету'"></span>
+                    <span th:if="${animal.getGender().getName() == 'FEMALE'}" th:text="'Не приучен к туалету'"></span>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <span th:if="${animal.getSterilization()}">
+                    <span th:if="${animal.getGender().getName() == 'MALE'}" th:text="'Кастрирован'"></span>
+                    <span th:if="${animal.getGender().getName() == 'FEMALE'}" th:text="'Стерилизована'"></span>
+                </span>
+                <span th:unless="${animal.getSterilization()}">
+                    <span th:if="${animal.getGender().getName() == 'MALE'}" th:text="'Не кастрирован'"></span>
+                    <span th:if="${animal.getGender().getName() == 'FEMALE'}" th:text="'Не стерилизована'"></span>
+                </span>
+            </td>
+            <td colspan="2">
+                <span th:if="${animal.getVaccinated() != null}">
+                    <span th:if="${animal.getGender().getName() == 'MALE'}" th:text="*{'Вакцинирован: ' + animal.getVaccinated()}"></span>
+                    <span th:if="${animal.getGender().getName() == 'FEMALE'}" th:text="*{'Вакцинирована: ' + animal.getVaccinated()}"></span>
+                </span>
+                <span th:unless="${animal.getVaccinated() != null}">
+                    <span th:if="${animal.getGender().getName() == 'MALE'}" th:text="'Не вакцинирован'"></span>
+                    <span th:if="${animal.getGender().getName() == 'FEMALE'}" th:text="'Не вакцинирована'"></span>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td th:text="*{animal.getDescription()}" colspan="4">...</td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="main-container_menu"
+         th:if="${animal.getIncome() != null}">
+        <a class="a_btn_type1" th:href="*{'/id/' + animal.getId + '/dotanions'}"><span th:text="*{'Вы можете помочь' + animal.getGenderSample() + '.'}"></span></a>
+    </div>
+</div>
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

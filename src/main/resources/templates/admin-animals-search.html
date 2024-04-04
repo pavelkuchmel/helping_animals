@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="admin-animals-search" th:fragment="admin-animals-search">
+  <button id="admin-animals-search-button_close">X</button>
+  <form action="animals/search" method="GET">
+    <label>Кличка
+    <input th:type="text" th:name="name">
+    </label>
+    <label>Пол
+      <select th:name="gender">
+        <option th:value="MALE">Девочка</option>
+        <option th:value="FEMALE">Мальчик</option>
+      </select>
+    </label>
+    <label>Собака/Котейка
+      <select th:name="type">
+        <option th:value="DOG">Собака</option>
+        <option th:value="CAT">Котейка</option>
+      </select>
+    </label>
+    <label>Возраст
+      <input th:type="number" th:name="age-min">
+      <input th:type="number" th:name="age-max">
+    </label>
+    <label>Высота
+      <input th:type="number" th:name="height-min">
+      <input th:type="number" th:name="height-max">
+    </label>
+    <label>Стерилизация
+      <input type="checkbox" th:name="sterilization">
+    </label>
+    <label>Вакцинация
+      <input type="checkbox" th:name="vaccination">
+    </label>
+    <label>Чип
+      <input type="checkbox" th:name="chipped">
+    </label>
+    <label>Приучен к туалету
+      <input type="checkbox" th:name="toilet">
+    </label>
+    <input type="submit" class="a_btn_type1" value="Поиск">
+  </form>
+</div>
+</body>
+</html>

@@ -6,11 +6,11 @@
   <title>Admin page</title>
 </head>
 <body>
-<div class="admin-animals-search-container" id="admin-animals-search-container">
-  <div th:replace="admin-animals-search :: admin-animals-search"></div>
+<div class="admin-page-search-container" id="admin-page-search-container_animals">
+  <div th:replace="~{admin-animals-search :: admin-animal-search}"></div>
 </div>
-<div th:replace="header :: header"></div>
-<div th:replace="admin-menu :: admin-menu"></div>
+<div th:replace="~{header :: header}"></div>
+<div th:replace="~{admin-menu :: admin-menu}"></div>
 <div class="main-container_animals">
   <table class="table">
     <col/>
@@ -25,6 +25,7 @@
       <th>Стер/костр</th>
       <th>Вакцина</th>
       <th>Описание</th>
+      <th>Чип</th>
       <th>Тип</th>
       <th>Добавлен(а)</th>
       <th>Сборы</th>
@@ -45,14 +46,18 @@
         <span th:unless="${animal.getSterilization()}">Нет</span>
       </td>
       <td>
-        <span th:if="${animal.getVaccinated() != null}" th:text="*{animal.getVaccinated()}">Да</span>
+        <span th:if="${animal.getVaccinated() != null}" th:text="*{animal.getDateVaccinated()}">Да</span>
         <span th:unless="${animal.getVaccinated() != null}">Нет</span>
       </td>
       <td>
         <div class="main-container_animals-full-description">
-          <span th:text="*{animal.getDescription()}"></span>
+          <span th:text="${animal.getDescription().length() >= 500 ? (animal.getDescription().substring(0, 499)  + '...') : animal.getDescription()}"></span>
         </div>
-        <span th:text="*{animal.getDescription().substring(0, 40) + '...'}"></span>
+        <span th:text="${animal.getDescription().length() >= 40 ? (animal.getDescription().substring(0, 39)  + '...') : animal.getDescription()}"></span>
+      </td>
+      <td>
+        <span th:if="${animal.getChipped()}">Да</span>
+        <span th:unless="${animal.getChipped()}">Нет</span>
       </td>
       <td th:text="*{animal.getAnimalType().getName()}">...</td>
       <td th:text="*{animal.getCreated()}">...</td>
@@ -66,7 +71,7 @@
     </tbody>
   </table>
 </div>
-<div th:replace="footer :: footer"></div>
+<div th:replace="~{footer :: footer}"></div>
 <script type="text/javascript" th:src="@{/js/index.js}"></script>
 </body>
 </html>

@@ -1,13 +1,10 @@
 package com.example.helping_animals.dto;
 
 import com.example.helping_animals.model.*;
-import com.example.helping_animals.util.CustomTimestamp;
 import lombok.*;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Setter
 @Getter
@@ -29,7 +26,9 @@ public class AnimalDto {
         this.setUpdated(animal.getUpdated());
         this.setIncome(animal.getIncome());
         this.setSterilization(animal.getSterilization());
-        this.setVaccinated(new CustomTimestamp(animal.getVaccinated()));
+        this.setVaccinated(animal.getVaccinated());
+        this.setDateVaccinated(animal.getVaccinated() != null ? new SimpleDateFormat("dd-MM-yy").format(animal.getVaccinated().getTime()) : "Нет");
+        this.setChipped(animal.getChipped());
 //        try {
 //            this.setVaccinated(new SimpleDateFormat("dd/MM/yyyy").parse(animal.getVaccinated().getDate() + "/" + (animal.getVaccinated().getMonth() + 1) + "/" + (animal.getVaccinated().getYear() + 1900)));
 //        } catch (ParseException e) {
@@ -70,7 +69,9 @@ public class AnimalDto {
     private String description;
     private String photo;
     private Boolean sterilization;
-    private CustomTimestamp vaccinated;
+    private Timestamp vaccinated;
+    private String dateVaccinated;
+    private Boolean chipped;
     private Boolean toiletOutside;
     //private Owner owner;
     private Income income;

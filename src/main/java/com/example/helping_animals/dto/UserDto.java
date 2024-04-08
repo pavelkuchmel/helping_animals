@@ -13,6 +13,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Setter
@@ -32,6 +34,10 @@ public class UserDto {
         this.setIncomes(user.getIncomes());
         this.setDonations(user.getDonations());
         this.setActivated(user.getActivated());
+        this.setCreated(user.getCreated());
+        this.setDateCrated(user.getCreated() != null ? new SimpleDateFormat("dd-MM-yy").format(user.getCreated().getTime()) : "");
+        this.setUpdated(user.getUpdated());
+        this.setDateUpdated(user.getUpdated() != null ? new SimpleDateFormat("dd-MM-yy").format(user.getUpdated().getTime()) : "");
     }
 
 
@@ -45,7 +51,9 @@ public class UserDto {
     private Boolean activated;
     private Role role;
     private Timestamp created;
+    private String dateCrated;
     private Timestamp updated;
+    private String dateUpdated;
     private List<Income> incomes;
     private List<Donation> donations;
 }

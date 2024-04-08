@@ -22,9 +22,23 @@ public class MainController {
         return "index";
     }
 
+    @GetMapping("/dogs")
+    public String showDogs(Model model) {
+        model.addAttribute("animals", animalService.findAnimalsByAnimalType("DOG"));
+        return "index";
+    }
+
+    @GetMapping("/cats")
+    public String showCats(Model model) {
+        model.addAttribute("animals", animalService.findAnimalsByAnimalType("CAT"));
+        return "index";
+    }
+
     @GetMapping("/id/{id}")
     public String showDetails(@PathVariable String id, Model model){
         model.addAttribute("animal", animalService.getAnimalById(Long.parseLong(id)));
         return "details";
     }
+
+
 }

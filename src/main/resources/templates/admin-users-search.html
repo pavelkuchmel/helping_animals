@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="admin-page-search" th:fragment="admin-user-search">
+  <button class="admin-page-search-button_close" id="admin-page-search_users_button_close" onclick="hideForm(this)">X</button>
+  <form action="users/search" method="GET">
+    <label>Имя
+      <input th:type="text" th:name="firstName">
+    </label>
+    <label>Фамилия
+      <input th:type="text" th:name="lastName">
+    </label><br/>
+    <label>Почта
+      <input th:type="text" th:name="email">
+    </label>
+    <label>Город
+      <input th:type="text" th:name="city">
+    </label><br/>
+    <label>Активирован
+      <input type="checkbox" th:name="activated">
+    </label>
+    <label>Сборы
+      <input type="checkbox" th:name="incomes">
+    </label>
+    <label>Статус
+      <select th:name="role">
+        <option th:value="UNKNOWN" selected disabled>Не важно</option>
+        <option th:value="ADMIN">Администратор</option>
+        <option th:value="MODERATOR">Модератор</option>
+        <option th:value="CURATOR">Куратор</option>
+        <option th:value="GENERAL">Пользователь</option>
+      </select>
+    </label>
+    <input type="submit" class="a_btn_type1" value="Поиск">
+  </form>
+</div>
+</body>
+</html>

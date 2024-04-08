@@ -6,7 +6,7 @@
     <title>Details</title>
 </head>
 <body>
-<div th:replace="header :: header"></div>
+<div th:replace="~{header :: header}"></div>
 <div class="main-container_animals">
     <table class="table">
         <thead>
@@ -44,8 +44,8 @@
             </td>
             <td colspan="2">
                 <span th:if="${animal.getVaccinated() != null}">
-                    <span th:if="${animal.getGender().getName() == 'MALE'}" th:text="*{'Вакцинирован: ' + animal.getVaccinated()}"></span>
-                    <span th:if="${animal.getGender().getName() == 'FEMALE'}" th:text="*{'Вакцинирована: ' + animal.getVaccinated()}"></span>
+                    <span th:if="${animal.getGender().getName() == 'MALE'}" th:text="*{'Вакцинирован: ' + animal.getDateVaccinated()}"></span>
+                    <span th:if="${animal.getGender().getName() == 'FEMALE'}" th:text="*{'Вакцинирована: ' + animal.getDateVaccinated()}"></span>
                 </span>
                 <span th:unless="${animal.getVaccinated() != null}">
                     <span th:if="${animal.getGender().getName() == 'MALE'}" th:text="'Не вакцинирован'"></span>
@@ -63,6 +63,6 @@
         <a class="a_btn_type1" th:href="*{'/id/' + animal.getId + '/dotanions'}"><span th:text="*{'Вы можете помочь' + animal.getGenderSample() + '.'}"></span></a>
     </div>
 </div>
-<div th:replace="footer :: footer"></div>
+<div th:replace="~{footer :: footer}"></div>
 </body>
 </html>

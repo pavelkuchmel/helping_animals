@@ -6,10 +6,9 @@
     <title>Index</title>
 </head>
 <body>
-<div th:replace="header :: header"></div>
+<div th:replace="~{header :: header}"></div>
 <div class="main-container_animals">
     <table class="table">
-        <thead>
         <col/>
         <tr>
             <th></th>
@@ -17,19 +16,18 @@
             <th>Возраст</th>
             <th>Высота в холке</th>
         </tr>
-        </thead>
         <tbody>
         <tr th:each="animal : ${animals}">
-            <td><a th:href="*{'/id/' + animal.getId}"><img th:src="*{animal.getPhoto()}" th:alt="animal"><a></a></td>
+            <td><a th:href="*{'/id/' + animal.getId}"><img th:src="*{animal.getPhoto()}" th:alt="animal"></a></td>
             <td th:text="*{animal.name}">...</td>
             <td th:text="*{animal.age}">...</td>
             <td th:text="*{animal.height}">...</td>
         </tr>
         </tbody>
     </table>
-<!--    <a class="a_btn_type1" th:href="@{/admin/add-product}">Add product</a>-->
+    <a class="a_btn_type1" th:href="@{/admin}">Admin</a>
 </div>
-<div th:replace="footer :: footer"></div>
+<div th:replace="~{footer :: footer}"></div>
 <script type="text/javascript" th:src="@{/js/index.js}"></script>
 </body>
 </html>

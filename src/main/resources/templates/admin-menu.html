@@ -4,10 +4,10 @@
 <div class="admin-menu" th:fragment="admin-menu">
   <header class="menu">
     <div class="menu-item">
-      <p>Пользователи</p>
+      <a class="a_btn_type1" th:href="@{/admin/users}">Пользователи</a>
       <div class="menu-item_drop">
         <div class="menu-item">
-          <p>Список</p>
+          <button class="a_btn_type1" id="btn_admin-page-search_users">Поиск</button>
         </div>
         <div class="menu-item">
           <p>Добавить</p>
@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="menu-item">
-      <p>Животные</p>
+      <a class="a_btn_type1" th:href="@{/admin/animals}">Животные</a>
       <div class="menu-item_drop">
         <div class="menu-item">
           <p>Список</p>
@@ -27,7 +27,7 @@
               <a class="a_btn_type1" th:href="@{/admin/animals?type=CAT}">Кошки</a>
             </div>
             <div class="menu-item">
-              <button class="a_btn_type1" id="btn_admin-animal-search">Поиск</button>
+              <button class="a_btn_type1" id="btn_admin-page-search_animals">Поиск</button>
             </div>
           </div>
         </div>

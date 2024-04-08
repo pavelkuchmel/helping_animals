@@ -54,6 +54,13 @@ body{
 .table tbody tr:nth-child(even) {
     background: #F7F7F7;
 }
+/*-------------------------------index page-----------------------------------------*/
+.main-container_animals .a_btn_type1{
+    width: 50px;
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+}
 /*-------------------------------table list button---------------------------------*/
 .main-container_menu{
     flex: 1 0 auto;
@@ -172,10 +179,10 @@ body{
     transition-duration: 100ms;
     display: block;
     width: 300px;
-    height: 200px;
+    height: 260px;
 }
 /*--------------------------search container replacement---------------------------*/
-.admin-animals-search-container{
+.admin-page-search-container{
     display: none;
     z-index: 4;
     background-color: white;
@@ -183,12 +190,13 @@ body{
     border-radius: 10px;
     align-items: center;
     justify-content: center;
+    margin-top: 50px;
     margin-bottom: 10px;
     width: 500px;
     height: 200px;
     position: absolute;
 }
-#admin-animals-search-button_close{
+.admin-page-search-button_close{
     position: absolute;
     right: 10px;
     top: 10px;

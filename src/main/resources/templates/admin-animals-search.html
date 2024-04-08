@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<div class="admin-animals-search" th:fragment="admin-animals-search">
-  <button id="admin-animals-search-button_close">X</button>
+<div class="admin-page-search" th:fragment="admin-animal-search">
+  <button class="admin-page-search-button_close" id="admin-page-search_animals_button_close" onclick="hideForm(this)">X</button>
   <form action="animals/search" method="GET">
     <label>Кличка
     <input th:type="text" th:name="name">
-    </label>
-    <label>Пол
-      <select th:name="gender">
-        <option th:value="MALE">Девочка</option>
-        <option th:value="FEMALE">Мальчик</option>
-      </select>
     </label>
     <label>Собака/Котейка
       <select th:name="type">
         <option th:value="DOG">Собака</option>
         <option th:value="CAT">Котейка</option>
       </select>
+    </label><br/>
+    <label>Пол
+      <select th:name="gender">
+        <option th:value="UNKNOWN" selected disabled>Не важно</option>
+        <option th:value="FEMALE">Девочка</option>
+        <option th:value="MALE">Мальчик</option>
+      </select>
     </label>
     <label>Возраст
-      <input th:type="number" th:name="age-min">
-      <input th:type="number" th:name="age-max">
+      <input th:type="number" th:name="age-min" th:value="0">
+      <input th:type="number" th:name="age-max" th:value="300">
     </label>
     <label>Высота
-      <input th:type="number" th:name="height-min">
-      <input th:type="number" th:name="height-max">
-    </label>
+      <input th:type="number" th:name="height-min" th:value="0">
+      <input th:type="number" th:name="height-max" th:value="200">
+    </label><br/>
     <label>Стерилизация
       <input type="checkbox" th:name="sterilization">
     </label>

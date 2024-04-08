@@ -3,10 +3,13 @@ package com.example.helping_animals.service;
 import com.example.helping_animals.dto.AnimalDto;
 import com.example.helping_animals.model.Animal;
 
+import com.example.helping_animals.model.AnimalType;
 import com.example.helping_animals.repository.AnimalRepository;
+import com.example.helping_animals.repository.AnimalTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +18,9 @@ public class AnimalServiceImpl implements AnimalService{
 
     @Autowired
     private AnimalRepository animalRepository;
+
+    @Autowired
+    private AnimalTypeRepository animalTypeRepository;
 
     @Override
     public List<AnimalDto> getAllAnimals() {
@@ -25,6 +31,12 @@ public class AnimalServiceImpl implements AnimalService{
     public AnimalDto getAnimalById(Long id) {
         return new AnimalDto(animalRepository.getReferenceById(id));
         //return animalToAnimalDto(animalRepository.getReferenceById(id));
+    }
+
+    @Override
+    public List<AnimalDto> findAnimalsByAnimalType(String string) {
+        AnimalType animalType = animalTypeRepository.findAnimalTypeByName(string.trim().toUpperCase());
+        return animalRepository.findAnimalsByAnimalType(animalType).stream().map(AnimalDto::new).collect(Collectors.toList());
     }
 
     private AnimalDto animalToAnimalDto(Animal animal){

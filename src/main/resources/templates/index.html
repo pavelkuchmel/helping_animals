@@ -5,29 +5,18 @@
     <link href="../static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet" />
     <title>Index</title>
 </head>
-<body>
+<body class="body_index">
 <div th:replace="~{header :: header}"></div>
 <div class="main-container_animals">
-    <table class="table">
-        <col/>
-        <tr>
-            <th></th>
-            <th>Кличка</th>
-            <th>Возраст</th>
-            <th>Высота в холке</th>
-        </tr>
-        <tbody>
-        <tr th:each="animal : ${animals}">
-            <td><a th:href="*{'/id/' + animal.getId}"><img th:src="*{animal.getPhoto()}" th:alt="animal"></a></td>
-            <td th:text="*{animal.name}">...</td>
-            <td th:text="*{animal.age}">...</td>
-            <td th:text="*{animal.height}">...</td>
-        </tr>
-        </tbody>
-    </table>
+    <th:block th:each="animal,iter : ${animals}">
+        <div class="main-container_animals_iter" th:style="'background-image: url('+ ${animal.getPhoto()} +');'">
+            <h2 th:text="${animal.getName()}"></h2>
+            <h3 th:text="${'Возраст: ' + animal.getAge()  + ' мес.'}"></h3>
+            <a th:href="*{'/id/' + animal.getId}"> </a>
+        </div>
+    </th:block>
     <a class="a_btn_type1" th:href="@{/admin}">Admin</a>
 </div>
-<div th:replace="~{footer :: footer}"></div>
 <script type="text/javascript" th:src="@{/js/index.js}"></script>
 </body>
 </html>

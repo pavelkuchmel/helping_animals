@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<div th:fragment="header">
+<div class="replace_header" th:fragment="header">
     <div class="main-container_menu">
         <a class="a_btn_type1" th:href="@{/}">Главная</a>
         <a class="a_btn_type1" th:href="@{/dogs}">Собаки</a>
         <a class="a_btn_type1" th:href="@{/cats}">Коты</a>
+        <div class="header-user_item">
+            <p class="a_btn_type1">Пользователь</p>
+            <div class="header-user_drop">
+                <p>Имя</p>
+                <a th:href="@{/login}">Войти</a>
+                <p>Выйти</p>
+                <p>Мои животные</p>
+                <p>Мои сборы</p>
+            </div>
+        </div>
     </div>
 </div>
 </body>

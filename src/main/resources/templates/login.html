@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html charset=UTF-8">
+    <link href="../static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet" />
+    <title>Login Page</title>
+</head>
+<body class="body_index">
+<div th:replace="~{header :: header}"></div>
+<div class="container-error" th:if="${param.error}">
+    <button class="admin-page-search-button_close" onclick="hideError(this)">X</button>
+    <div>Неверный email или пароль</div>
+</div>
+<form method="post" role="form" th:action="@{/login}">
+        <label>Email
+        <input type="text" name="username" placeholder="Введите email"/>
+        </label>
+        <label>Пароль
+        <input type="password" name="password" placeholder="Введите пароль"/>
+        </label>
+        <button type="submit">Войти</button>
+        <p>Вы еще не зарегистрировались? <a th:href="@{/registration}">Зарегистрироваться</a></p>
+</form>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+</body>
+</html>

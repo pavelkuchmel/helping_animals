@@ -1,4 +1,4 @@
-package com.example.helping_animals.mail;
+package com.example.helping_animals.config;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;

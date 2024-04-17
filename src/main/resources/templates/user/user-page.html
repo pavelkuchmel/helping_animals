@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link href="../../static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet" />
+  <title>User page</title>
+</head>
+<body>
+<div class="replace_header" th:replace="~{header :: header}"></div>
+<table class="table">
+  <tbody>
+  <tr>
+    <td>Имя</td><td th:text="*{user.getFirstName()}">...</td>
+  </tr>
+  <tr>
+    <td>Фамилия</td><td th:text="*{user.getLastName()}">...</td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <span th:if="${user.getActivated()}">Активирован</span>
+      <a th:unless="${user.getActivated()}" th:href="@{/user/activacion}">Активируйте</a>
+    </td>
+  </tr>
+  <tr>
+    <td>Статус</td><td th:text="*{user.getRole().getName()}">...</td>
+  </tr>
+  <tr>
+    <td>Email</td><td th:text="*{user.getEmail()}">...</td>
+  </tr>
+  <tr>
+    <td>Instagram</td><td th:text="*{user.getInstagram()}">...</td>
+  </tr>
+  <tr>
+    <td>Номер телефона</td><td th:text="*{user.getPhoneNumber()}">...</td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <a th:unless="${user.getIncomes() == null}" th:href="@{/admin/users}">Cборы</a>
+      <span th:if="${user.getIncomes() == null}">Сборов нет</span>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <a th:href="@{/user/password}">Изменить пароль</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<div th:replace="~{footer :: footer}"></div>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+</body>
+</html>

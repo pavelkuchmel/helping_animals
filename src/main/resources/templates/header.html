@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <body>
 <div class="replace_header" th:fragment="header">
     <div class="main-container_menu">
@@ -7,13 +8,26 @@
         <a class="a_btn_type1" th:href="@{/dogs}">Собаки</a>
         <a class="a_btn_type1" th:href="@{/cats}">Коты</a>
         <div class="header-user_item">
-            <p class="a_btn_type1">Пользователь</p>
+            <p class="a_btn_type1"><span th:if="${authorized != null}" sec:authorize="isAuthenticated()" th:text="*{authorized.getFirstName()}"></span><span sec:authorize="!isAuthenticated()">Пользователь</span></p>
             <div class="header-user_drop">
-                <p>Имя</p>
-                <a th:href="@{/login}">Войти</a>
-                <p>Выйти</p>
-                <p>Мои животные</p>
-                <p>Мои сборы</p>
+                <div class="header-user_drop-item">
+                <a sec:authorize="isAuthenticated()" th:href="@{/user}">Профиль</a>
+                </div>
+                <div class="header-user_drop-item">
+                <a sec:authorize="isAuthenticated()" th:href="@{/animals}">Животные</a>
+                </div>
+                <div class="header-user_drop-item">
+                <a sec:authorize="isAuthenticated()" th:href="@{/animals}">Сборы</a>
+                </div>
+                <div class="header-user_drop-item">
+                <a sec:authorize="!isAuthenticated()" th:href="@{/login}">Войти</a>
+                </div>
+                <div class="header-user_drop-item">
+                    <a sec:authorize="!isAuthenticated()" th:href="@{/registration}">Регистрация</a>
+                </div>
+                <div class="header-user_drop-item">
+                <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Выйти</a>
+                </div>
             </div>
         </div>
     </div>

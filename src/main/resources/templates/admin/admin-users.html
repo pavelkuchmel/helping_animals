@@ -22,8 +22,8 @@
       <th>Добавлен</th>
       <th>Обновлен</th>
       <th>Сборы</th>
-      <th></th>
-      <th></th>
+      <th  class="table_edit-icon"></th>
+      <th  class="table_delete-icon"></th>
     </tr>
     <tbody>
     <tr th:each="user : ${users}">
@@ -35,14 +35,14 @@
       </td>
       <td th:text="*{user.getRole().getName()}">...</td>
       <td th:text="*{user.getEmail()}">...</td>
-      <td th:text="*{user.getDateCrated()}">...</td>
+      <td th:text="*{user.getDateCreated()}">...</td>
       <td th:text="*{user.getDateUpdated()}">...</td>
       <td>
         <a th:unless="${user.getIncomes() == null}" th:href="@{/admin/users}">Да</a>
         <span th:if="${user.getIncomes() == null}">Нет</span>
       </td>
-      <td></td>
-      <td></td>
+      <td><a th:href="@{/admin}"><img class="icon" th:src="@{/img/icons/edit.png}" th:alt="edit"></a></td>
+      <td><a th:href="@{/admin}"><img class="icon" th:src="@{/img/icons/delete.png}" th:alt="delete"></a></td>
     </tr>
     </tbody>
   </table>

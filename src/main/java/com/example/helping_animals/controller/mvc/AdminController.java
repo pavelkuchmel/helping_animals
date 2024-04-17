@@ -6,6 +6,7 @@ import com.example.helping_animals.service.AnimalService;
 import com.example.helping_animals.service.IncomeService;
 import com.example.helping_animals.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,6 +58,7 @@ public class AdminController {
                 return "admin/admin-animals";
             }
         }
+        if(!SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")) model.addAttribute("authorized", userService.findUserDtoByEmail(SecurityContextHolder.getContext().getAuthentication().getName()));
         model.addAttribute("animals", animalService.getAllAnimals());
         return "admin/admin-animals";
     }
@@ -120,7 +122,7 @@ public class AdminController {
         }).filter(animalDto ->
                 animalDto.getName().trim().toLowerCase().contains(params.get("name").toString().trim().toLowerCase())
         ).collect(Collectors.toList()));
-
+        if(!SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")) attributes.addFlashAttribute("authorized", userService.findUserDtoByEmail(SecurityContextHolder.getContext().getAuthentication().getName()));
         return new RedirectView("/admin/animals");
     }
 
@@ -130,6 +132,7 @@ public class AdminController {
             model.addAttribute("users", (List<UserDto>)model.getAttribute("found-users"));
             return "admin/admin-users";
         }
+        if(!SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")) model.addAttribute("authorized", userService.findUserDtoByEmail(SecurityContextHolder.getContext().getAuthentication().getName()));
         model.addAttribute("users", userService.getAllUsers());
         return "admin/admin-users";
     }
@@ -193,7 +196,7 @@ public class AdminController {
                 return true;
             }
         }).collect(Collectors.toList()));
-
+        if(!SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")) attributes.addFlashAttribute("authorized", userService.findUserDtoByEmail(SecurityContextHolder.getContext().getAuthentication().getName()));
         return new RedirectView("/admin/users");
     }
 

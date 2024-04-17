@@ -29,8 +29,8 @@
       <th>Тип</th>
       <th>Добавлен(а)</th>
       <th>Сборы</th>
-      <th></th>
-      <th></th>
+      <th class="table_edit-icon"></th>
+      <th class="table_edit-icon"></th>
     </tr>
     </thead>
     <tbody>
@@ -65,8 +65,8 @@
         <a th:if="${animal.getIncome() != null}" th:href="@{/admin/donations/(*{animal.getId()})}">Да</a>
         <span th:unless="${animal.getIncome() != null}">Нет</span>
       </td>
-      <td></td>
-      <td></td>
+      <td><a th:href="@{/admin}"><img class="icon" th:src="@{/img/icons/edit.png}" th:alt="edit"></a></td>
+      <td><a th:href="@{/admin}"><img class="icon" th:src="@{/img/icons/delete.png}" th:alt="delete"></a></td>
     </tr>
     </tbody>
   </table>

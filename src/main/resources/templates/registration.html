@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html charset=UTF-8">
+  <link href="../static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet" />
+  <title>Registration Page</title>
+</head>
+<body class="body_index">
+<div th:replace="~{header :: header}"></div>
+<div class="container-error" th:if="${message != null}">
+    <button class="admin-page-search-button_close" onclick="hideError(this)">X</button>
+    <div><span th:text="${message}"></span></div>
+</div>
+<form method="post"  role="form" th:action="@{/registration/save}" th:object="${user}">
+    <label class="form-label">Имя
+    <input type="text" name="firstName" placeholder="Введите имя" th:field="*{firstName}" required/>
+    </label>
+    <label class="form-label">Фамилия
+    <input type="text" name="lastName" placeholder="Введите фамилию" th:field="*{lastName}" required/>
+    </label>
+    <label class="form-label">Email
+    <input type="email" name="email" placeholder="Введите свой email" th:field="*{email}" required/>
+    </label>
+    <label class="form-label">Пароль
+    <input type="password" name="password" placeholder="Введите свой пароль" th:field="*{password}" required/>
+    </label>
+    <button type="submit">Зарегистрироваться</button>
+    <p>Если вы уже зарегистрировались? <a th:href="@{/login}">Войти</a></p>
+</form>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+</body>
+</html>

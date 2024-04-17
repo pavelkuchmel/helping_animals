@@ -15,8 +15,8 @@ document.querySelector('#btn_admin-page-search_users').addEventListener('click',
 //     }
 // });
 function hideForm(event){
-    //console.log("1 - " + event.parentElement.className);
-    //console.log("2 - " + event.parentElement.parentElement.className);
-    //console.log("3 - " + event.parentElement.parentElement.parentElement.className)
     event.parentElement.parentElement.style.display = 'none';
+}
+function hideError(event){
+    event.parentElement.style.display = 'none';
 }

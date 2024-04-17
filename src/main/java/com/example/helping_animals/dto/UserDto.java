@@ -4,17 +4,13 @@ import com.example.helping_animals.model.Donation;
 import com.example.helping_animals.model.Income;
 import com.example.helping_animals.model.Role;
 import com.example.helping_animals.model.User;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Setter
@@ -30,12 +26,13 @@ public class UserDto {
         this.setAddress(user.getAddress());
         this.setEmail(user.getEmail());
         this.setPhoneNumber(user.getPhoneNumber());
+        this.setInstagram(user.getInstagram());
         this.setRole(user.getRole());
         this.setIncomes(user.getIncomes());
         this.setDonations(user.getDonations());
         this.setActivated(user.getActivated());
         this.setCreated(user.getCreated());
-        this.setDateCrated(user.getCreated() != null ? new SimpleDateFormat("dd-MM-yy").format(user.getCreated().getTime()) : "");
+        this.setDateCreated(user.getCreated() != null ? new SimpleDateFormat("dd-MM-yy").format(user.getCreated().getTime()) : "");
         this.setUpdated(user.getUpdated());
         this.setDateUpdated(user.getUpdated() != null ? new SimpleDateFormat("dd-MM-yy").format(user.getUpdated().getTime()) : "");
     }
@@ -48,10 +45,11 @@ public class UserDto {
     private String email;
     //private String password;
     private String phoneNumber;
+    private String instagram;
     private Boolean activated;
     private Role role;
     private Timestamp created;
-    private String dateCrated;
+    private String dateCreated;
     private Timestamp updated;
     private String dateUpdated;
     private List<Income> incomes;

@@ -1,13 +1,10 @@
 package com.example.helping_animals.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.bind.DefaultValue;
+
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -17,7 +14,9 @@ import java.util.List;
 @Table(name = "users")
 @Getter
 @Setter
-public class User implements Serializable {
+@AllArgsConstructor
+@NoArgsConstructor
+public class User implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +35,9 @@ public class User implements Serializable {
     private String email;
 
     @Column
+    private String instagram;
+
+    @Column
     private String password;
 
     @Column(name = "phone_number")
@@ -45,7 +47,6 @@ public class User implements Serializable {
     private String passport;
 
     @Column(nullable = false)
-    @Value("${some.key:false}")
     private Boolean activated;
 
     @ManyToOne

@@ -10,23 +10,26 @@
         <div class="header-user_item">
             <p class="a_btn_type1"><span th:if="${authorized != null}" sec:authorize="isAuthenticated()" th:text="*{authorized.getFirstName()}"></span><span sec:authorize="!isAuthenticated()">Пользователь</span></p>
             <div class="header-user_drop">
-                <div class="header-user_drop-item">
-                <a sec:authorize="isAuthenticated()" th:href="@{/user}">Профиль</a>
+                <div sec:authorize="hasRole('ADMIN')" class="header-user_drop-item">
+                    <a th:href="@{/admin}">Админ</a>
                 </div>
-                <div class="header-user_drop-item">
-                <a sec:authorize="isAuthenticated()" th:href="@{/animals}">Животные</a>
+                <div  sec:authorize="isAuthenticated()"  class="header-user_drop-item">
+                <a th:href="@{/user}">Профиль</a>
                 </div>
-                <div class="header-user_drop-item">
-                <a sec:authorize="isAuthenticated()" th:href="@{/animals}">Сборы</a>
+                <div sec:authorize="isAuthenticated()" class="header-user_drop-item">
+                <a th:href="@{/animals}">Животные</a>
                 </div>
-                <div class="header-user_drop-item">
-                <a sec:authorize="!isAuthenticated()" th:href="@{/login}">Войти</a>
+                <div sec:authorize="isAuthenticated()" class="header-user_drop-item">
+                <a th:href="@{/animals}">Сборы</a>
                 </div>
-                <div class="header-user_drop-item">
-                    <a sec:authorize="!isAuthenticated()" th:href="@{/registration}">Регистрация</a>
+                <div sec:authorize="!isAuthenticated()" class="header-user_drop-item">
+                <a th:href="@{/login}">Войти</a>
                 </div>
-                <div class="header-user_drop-item">
-                <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Выйти</a>
+                <div sec:authorize="!isAuthenticated()" class="header-user_drop-item">
+                    <a th:href="@{/registration}">Регистрация</a>
+                </div>
+                <div sec:authorize="isAuthenticated()" class="header-user_drop-item">
+                <a th:href="@{/logout}">Выйти</a>
                 </div>
             </div>
         </div>

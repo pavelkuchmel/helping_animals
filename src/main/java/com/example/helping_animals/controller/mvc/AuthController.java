@@ -4,6 +4,7 @@ import com.example.helping_animals.dto.UserRegistrationDto;
 import com.example.helping_animals.model.User;
 import com.example.helping_animals.service.MailSenderService;
 import com.example.helping_animals.service.UserService;
+import static com.example.helping_animals.util.EncryptDecryptUtils.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,6 +36,18 @@ public class AuthController {
     @Value("${message.registration.successfully}")
     private String msgSuccessfully;
 
+    @Value("${message.error.unknown}")
+    private String msgErrorUnknown;
+
+    @Value("${mail.message.mail-activation.title}")
+    private String mailMessageActivationTitle;
+
+    @Value("${mail.message.mail-activation.body}")
+    private String mailMessageActivationBody;
+
+    @Value("${activation.url}")
+    private String activationUrl;
+
     @Autowired
     private UserService userService;
 
@@ -58,7 +71,7 @@ public class AuthController {
                                      Model model){
         RedirectView redirectView = new RedirectView("/registration");
         User existingUser = userService.findUserByEmail(userRegistrationDto.getEmail());
-        if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()){
+        if(false){
             result.rejectValue("email", "already", msgErrorAlready);
         }
         if (userRegistrationDto.getPassword().length() < minLength
@@ -70,10 +83,14 @@ public class AuthController {
             redirectAttributes.addFlashAttribute("message", result.getFieldError().getDefaultMessage());
             return redirectView;
         }
-
-        userService.saveUser(userRegistrationDto);
+        if (true/*userService.saveUser(userRegistrationDto) != null*/) {
+            mailService.sendNewMail(userRegistrationDto.getEmail(), mailMessageActivationTitle, mailMessageActivationBody + activationUrl + encrypt(userRegistrationDto.getEmail()));
+            redirectAttributes.addFlashAttribute("user", userRegistrationDto);
+            redirectAttributes.addFlashAttribute("message", msgSuccessfully);
+            return redirectView;
+        }
         redirectAttributes.addFlashAttribute("user", userRegistrationDto);
-        redirectAttributes.addFlashAttribute("message", msgSuccessfully);
+        redirectAttributes.addFlashAttribute("message", msgErrorUnknown);
         return redirectView;
     }
 

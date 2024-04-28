@@ -6,6 +6,10 @@
     <title>Login Page</title>
 </head>
 <body class="body_index">
+<div class="container-error" th:if="${message != null}">
+    <button class="admin-page-search-button_close" onclick="hideError(this)">X</button>
+    <div><span th:text="${message}"></span></div>
+</div>
 <div th:replace="~{header :: header}"></div>
 <div class="container-error" th:if="${param.error}">
     <button class="admin-page-search-button_close" onclick="hideError(this)">X</button>

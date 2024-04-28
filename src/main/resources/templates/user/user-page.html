@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
   <meta charset="UTF-8">
   <link href="../../static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet" />
   <title>User page</title>
 </head>
 <body>
+<div class="container-error" th:if="${message != null}">
+  <button class="admin-page-search-button_close" onclick="hideError(this)">X</button>
+  <div><span th:text="${message}"></span></div>
+</div>
 <div class="replace_header" th:replace="~{header :: header}"></div>
 <table class="table">
   <tbody>
@@ -18,7 +23,7 @@
   <tr>
     <td colspan="2">
       <span th:if="${user.getActivated()}">Активирован</span>
-      <a th:unless="${user.getActivated()}" th:href="@{/user/activacion}">Активируйте</a>
+      <a th:unless="${user.getActivated()}" th:href="@{/activation}">Активируйте</a>
     </td>
   </tr>
   <tr>
@@ -31,12 +36,31 @@
     <td>Instagram</td><td th:text="*{user.getInstagram()}">...</td>
   </tr>
   <tr>
-    <td>Номер телефона</td><td th:text="*{user.getPhoneNumber()}">...</td>
+    <td>Номер телефона</td><td th:text="*{'+' + user.getPhoneNumber()}">...</td>
+  </tr>
+  <tr>
+    <td>Адрес</td><td th:text="*{user.getAddress()}">...</td>
+  </tr>
+  <tr>
+    <td>Зарегистрирован</td><td th:text="*{user.getDateCreated()}">...</td>
+  </tr>
+  <tr>
+    <td>Обновлен</td><td th:text="*{user.getDateUpdated()}">...</td>
+  </tr>
+  <tr sec:authorize="hasAnyRole('GENERAL')">
+    <td colspan="2">
+      <a th:href="@{/user/curator-form}">Стать куратором</a>
+    </td>
+  </tr>
+  <tr sec:authorize="hasAnyRole('ADMIN', 'MODERATOR', 'CURATOR')">
+    <td colspan="2">
+      <a th:if="${user.getIncomes().size() > 0}" th:href="@{/admin/users}">Cборы</a>
+      <span th:unless="${user.getIncomes().size() > 0}">Сборов нет</span>
+    </td>
   </tr>
   <tr>
     <td colspan="2">
-      <a th:unless="${user.getIncomes() == null}" th:href="@{/admin/users}">Cборы</a>
-      <span th:if="${user.getIncomes() == null}">Сборов нет</span>
+      <a th:href="@{/user/edit-profile}">Изменить профиль</a>
     </td>
   </tr>
   <tr>

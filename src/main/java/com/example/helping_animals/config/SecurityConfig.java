@@ -26,11 +26,12 @@ public class SecurityConfig{
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authorize) ->
                         authorize
-                                .requestMatchers("/registration/**").anonymous()
+                                .requestMatchers("/dogs", "/cats", "/activation", "/id/**").permitAll()
+                                .requestMatchers("/registration/**", "/login").anonymous()
                                 .requestMatchers("/user/**").authenticated()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
-                                .requestMatchers(new AntPathRequestMatcher("/img/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/img/passports/**")).hasRole("ADMIN")
+                                .requestMatchers(new AntPathRequestMatcher("/img/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/css/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/js/**")).permitAll()
                 ).formLogin(
@@ -38,7 +39,6 @@ public class SecurityConfig{
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
                                 .defaultSuccessUrl("/")
-                                .permitAll()
                 ).logout(
                         logout -> logout
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
@@ -53,6 +53,5 @@ public class SecurityConfig{
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
     }
-
 
 }

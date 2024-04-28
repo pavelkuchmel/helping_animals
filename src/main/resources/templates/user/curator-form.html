@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+  <meta charset="UTF-8">
+  <link href="../../static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet" />
+  <title>Curator form</title>
+</head>
+<body>
+<div class="container-error" th:if="${message != null}">
+  <button class="admin-page-search-button_close" onclick="hideError(this)">X</button>
+  <div><span th:text="${message}"></span></div>
+</div>
+<div class="replace_header" th:replace="~{header :: header}"></div>
+<h2 style="text-align: center">Проверьте, правильно ли заполнены все поля в вашем профиле, прежде чем отправлять запрос.</h2>
+<form method="post"  role="form" th:action="@{/user/curator-form}" enctype="multipart/form-data">
+  <input type="file" th:name="image" accept="img/animals/*" required>
+  <input type="hidden" name="id" th:value="${authorized.getEmail()}">
+  <input type="hidden" name="id" th:value="${authorized.getId()}">
+  <button class="a_btn_type1" type="submit">Стать куратором</button>
+</form>
+<div th:replace="~{footer :: footer}"></div>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+</body>
+</html>

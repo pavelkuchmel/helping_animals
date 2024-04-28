@@ -37,6 +37,10 @@ public class UserDto {
         this.setDateUpdated(user.getUpdated() != null ? new SimpleDateFormat("dd-MM-yy").format(user.getUpdated().getTime()) : "");
     }
 
+    /*public void setRole(String roleName){
+
+    }*/
+
 
     private long id;
     private String firstName;
@@ -44,6 +48,7 @@ public class UserDto {
     private String address;
     private String email;
     //private String password;
+    //private String passport;
     private String phoneNumber;
     private String instagram;
     private Boolean activated;

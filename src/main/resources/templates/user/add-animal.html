@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+  <meta charset="UTF-8">
+  <link href="../../static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet" />
+  <title>Add animal</title>
+</head>
+<body>
+<div class="container-error" th:if="${message != null}">
+  <button class="admin-page-search-button_close" onclick="hideError(this)">X</button>
+  <div><span th:text="${message}"></span></div>
+</div>
+<div class="replace_header" th:replace="~{header :: header}"></div>
+<div class="container-form">
+  <form method="post"  role="form" th:action="@{/user/add-animal}" th:object="${animal}" enctype="multipart/form-data">
+    <table>
+      <tbody>
+      <tr>
+        <td>Кличка</td>
+        <td>
+          <input type="text" th:name="name" placeholder="Введите кличку" th:field="*{name}" required>
+        </td>
+      </tr>
+      <tr>
+        <td>Тип</td>
+        <td>
+          <select th:name="animalType" th:field="*{animalType}" required>
+            <th:block th:each="type : ${animalTypes}">
+              <option th:value="${type.getName()}" th:text="${type.getTitle()}">...</option>
+            </th:block>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Пол</td>
+        <td>
+          <select th:name="gender" th:field="*{gender}" required>
+            <option th:value="FEMALE">Девочка</option>
+            <option th:value="MALE">Мальчик</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Возраст(мес.)</td>
+        <td>
+          <input type="number" th:name="age" th:field="*{age}" required>
+        </td>
+      </tr>
+      <tr>
+        <td>Высота</td>
+        <td>
+          <input type="number" th:name="height" th:field="*{height}" required>
+        </td>
+      </tr>
+      <tr>
+        <td>Описание</td>
+        <td>
+          <textarea rows="10" cols="50" th:name="description" th:field="*{description}"></textarea>
+        </td>
+      </tr>
+      <tr>
+        <td>Стерилизация</td>
+        <td>
+          <select th:name="sterilization" th:field="*{sterilization}" required>
+            <option th:value="false" selected>Нет</option>
+            <option th:value="true">Да</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Вакцинация</td>
+        <td>
+          <input type="date" th:name="vaccinated" th:field="*{vaccinated}">
+        </td>
+      </tr>
+      <tr>
+        <td>Чип</td>
+        <td>
+          <select th:name="chipped" th:field="*{chipped}" required>
+            <option th:value="false" selected>Нет</option>
+            <option th:value="true" >Да</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Приучен к туалету</td>
+        <td>
+          <select th:name="toiletOutside" th:field="*{toiletOutside}" required>
+            <option th:value="false" selected>Нет</option>
+            <option th:value="true" >Да</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Фотография</td>
+        <td>
+          <input type="file" th:name="image" accept="img/animals/*" required>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <button class="a_btn_type1" type="submit">Добавить</button>
+  </form>
+</div>
+<div th:replace="~{footer :: footer}"></div>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.example.helping_animals.model;
 
+import com.example.helping_animals.dto.UserDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -20,7 +21,7 @@ public class User implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "first_name")
     private String firstName;

@@ -1,11 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta http-equiv="Content-Type" content="text/html charset=UTF-8">
-    <link href="../static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet" />
+    <link href="../static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet"/>
     <title>Index</title>
 </head>
 <body class="body_index">
+<!--<th:block sec:authorize="isAuthenticated()">
+    <div class="container-error" th:unless="${authorized.getActivated()}">
+        <button class="admin-page-search-button_close" onclick="hideError(this)">X</button>
+        <div><span th:text="${message}"></span></div>
+    </div>
+</th:block>-->
+<div class="container-error" th:if="${message != null}">
+    <button class="admin-page-search-button_close" onclick="hideError(this)">X</button>
+    <div><span th:text="${message}"></span></div>
+</div>
 <div th:replace="~{header :: header}"></div>
 <div class="main-container_animals">
     <th:block th:each="animal,iter : ${animals}">

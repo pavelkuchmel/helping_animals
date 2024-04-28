@@ -23,6 +23,9 @@ public class AnimalType implements Serializable {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @Column(nullable = false)
+    private String title;
+
     @OneToMany(mappedBy = "animalType")
     private List<Animal> animals;
 

@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
+<div class="container-error" th:if="${message != null}">
+  <button class="admin-page-search-button_close" onclick="hideError(this)">X</button>
+  <div><span th:text="${message}"></span></div>
+</div>
 <div class="admin-menu" th:fragment="admin-menu">
   <header class="menu">
     <div class="menu-item">

@@ -1,24 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
   <meta charset="UTF-8">
   <link href="../../static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet" />
-  <title>Admin page</title>
+  <title>Animals page</title>
 </head>
 <body>
+<div class="replace_header" th:replace="~{header :: header}"></div>
 <div class="container-error" th:if="${message != null}">
   <button class="admin-page-search-button_close" onclick="hideError(this)">X</button>
   <div><span th:text="${message}"></span></div>
 </div>
-<div class="admin-page-search-container" id="admin-page-search-container_animals">
-  <div th:replace="~{admin-animals-search :: admin-animal-search}"></div>
-</div>
-<div class="replace_header" th:replace="~{header :: header}"></div>
-<div th:replace="~{admin-menu :: admin-menu}"></div>
 <div class="main-container_animals">
   <table class="table">
     <col/>
     <thead>
+    <tr sec:authorize="isAuthenticated()">
+      <td colspan="15" th:if="${authorized.getActivated()}">
+        <a th:href="@{/user/add-animal}">Добавить животное</a>
+      </td>
+      <td colspan="15" th:unless="${authorized.getActivated()}">
+        Что бы добавлять животных, вам надо подтвердить почту.
+      </td>
+    </tr>
     <tr>
       <th></th>
       <th>Кличка</th>
@@ -63,14 +68,26 @@
         <span th:if="${animal.getChipped()}">Да</span>
         <span th:unless="${animal.getChipped()}">Нет</span>
       </td>
-      <td th:text="*{animal.getAnimalType().getName()}">...</td>
+      <td th:text="*{animal.getAnimalType().getTitle()}">...</td>
       <td th:text="*{animal.getCreated()}">...</td>
       <td>
         <a th:if="${animal.getIncome() != null}" th:href="@{/admin/donations/(*{animal.getId()})}">Да</a>
         <span th:unless="${animal.getIncome() != null}">Нет</span>
       </td>
-      <td><a th:href="@{/admin}"><img class="icon" th:src="@{/img/icons/edit.png}" th:alt="edit"></a></td>
-      <td><a th:href="@{/admin}"><img class="icon" th:src="@{/img/icons/delete.png}" th:alt="delete"></a></td>
+      <td><a th:href="@{/user/animal/edit}"><img class="icon" th:src="@{/img/icons/edit.png}" th:alt="edit"></a></td>
+      <td>
+        <div class="container-confirm_main">
+          <button class="btn_show_container-confirm" onclick="showConfirm(this)"><img class="icon" th:src="@{/img/icons/delete.png}" th:alt="delete"></button>
+          <div class="container-confirm">
+            <div class="container-confirm_info">
+              <h2>Удаление "<span th:text="*{animal.getName()}"></span>"</h2>
+              <h3>Вы уверены?</h3>
+            </div>
+            <a class="a_btn_type1" th:href="*{'/user/delete-animal?id=' + animal.getId}">Удалить</a>
+            <button class="a_btn_type1" onclick="hideError(this)">Отмена</button>
+          </div>
+        </div>
+      </td>
     </tr>
     </tbody>
   </table>

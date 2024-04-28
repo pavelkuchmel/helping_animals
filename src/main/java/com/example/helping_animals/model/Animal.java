@@ -1,10 +1,16 @@
 package com.example.helping_animals.model;
 
+import com.example.helping_animals.dto.AnimalRegistrationDto;
+import com.example.helping_animals.service.AnimalTypeService;
+import com.example.helping_animals.service.UserService;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -13,6 +19,8 @@ import java.sql.Timestamp;
 @Table(name = "animals")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Animal implements Serializable {
 
     @Id

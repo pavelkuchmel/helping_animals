@@ -2,14 +2,15 @@ package com.example.helping_animals.util;
 
 import lombok.experimental.UtilityClass;
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
+import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -60,6 +61,9 @@ public class EncryptDecryptUtils {
         }
     }
 
+    public static void main(String[] args) {
+        System.out.println("http://localhost:8088/activation?token=" + encrypt("test@test.com"));
+    }
     /**
      * Decrypt this string with the internal algorithm. The passed argument should be encrypted using
      * {@link #encrypt(String) encrypt} method of this class.
@@ -81,6 +85,5 @@ public class EncryptDecryptUtils {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
 }

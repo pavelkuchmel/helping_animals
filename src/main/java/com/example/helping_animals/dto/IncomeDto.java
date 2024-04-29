@@ -10,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Setter
@@ -28,6 +29,7 @@ public class IncomeDto {
         this.setIncomeType(income.getIncomeType());
         this.setDonations(income.getDonations());
         this.setReports(income.getReports());
+        this.setCreated(new SimpleDateFormat("dd-MM-yy").format(income.getCreated().getTime()));
     }
 
     private Long id;
@@ -35,8 +37,9 @@ public class IncomeDto {
     private Double requiredAmount;
     private String description;
     private Boolean relevant;
-    private Timestamp created;
-    private Timestamp updated;
+    //TODO заменить стринг на нормальную дату
+    private String created;
+    private String updated;
     private List<Animal> animals;
     private IncomeType incomeType;
     private List<Donation> donations;

@@ -20,7 +20,7 @@ public class ImageSaver {
     public boolean delete(String image){
         if (image != null){
             String name = image.substring(image.lastIndexOf("/") + 1);
-            Path pathAndName = Paths.get("c:/JavaCode/helping_animals/upload/animals", name);
+            Path pathAndName = Paths.get(photoAnimalDirectoryUpload, name);
             File file = new File(pathAndName.toUri());
             if (file.exists()){
                 return file.delete();
@@ -46,16 +46,5 @@ public class ImageSaver {
             Files.write(filePathAndName, image.getBytes());
         }
         return "/img/animals/" + name.toString();
-        /*StringBuilder filePathAndPathForView;
-        String fileName;
-        Path filePathAndName;
-        do{
-            fileName = "s"+ new Random().nextInt(10000000, 99999999) +".jpg";
-            filePathAndName = Paths.get(photoAnimalDirectoryUpload, fileName);
-        }while (new File(filePathAndName.toString()).exists());
-        filePathAndPathForView = new StringBuilder(photoAnimalDirectoryLoad);
-        Files.write(filePathAndName, image.getBytes());
-        filePathAndPathForView.append(fileName);
-        return filePathAndPathForView.toString();*/
     }
 }

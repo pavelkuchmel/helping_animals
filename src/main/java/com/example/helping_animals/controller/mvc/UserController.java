@@ -8,10 +8,11 @@ import com.example.helping_animals.service.AnimalService;
 import com.example.helping_animals.service.AnimalTypeService;
 import com.example.helping_animals.service.MailSenderService;
 import com.example.helping_animals.service.UserService;
+import com.example.helping_animals.util.CryptoException;
 import com.example.helping_animals.util.ImageSaver;
 
+import com.example.helping_animals.util.PassportSaver;
 import com.example.helping_animals.util.QRUtilAndSaver;
-import com.google.zxing.WriterException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,7 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 import java.text.ParseException;
 
-import static com.example.helping_animals.util.EncryptDecryptUtils.encrypt;
+import static com.example.helping_animals.util.EncryptDecryptUtils.*;
 
 @Controller
 @RequestMapping("/user")
@@ -35,6 +36,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PassportSaver passportSaver;
     @Autowired
     private AnimalTypeService animalTypeService;
 
@@ -49,6 +52,7 @@ public class UserController {
 
     @Autowired
     private QRUtilAndSaver qrSaver;
+
     @Value("${mail.message.mail-activation.title}")
     private String mailMessageActivationTitle;
     @Value("${mail.message.mail-activation.body}")
@@ -246,19 +250,15 @@ public class UserController {
     @PostMapping("/curator-form")
     public String curatorForm(@RequestParam(value = "image") MultipartFile image,
                               @RequestParam(value = "id") String id,
-                              @RequestParam(value = "email") String email, Model model){
-        return null;
-    }
-
-    @GetMapping("/test")
-    public String test(){
+                              @RequestParam(value = "email") String email, Model model,
+                              RedirectAttributes redirectAttributes){
         try {
-            qrSaver.createQRandSave("google.com", "google");
-        } catch (WriterException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            passportSaver.save(image);
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("message", e.getMessage());
+            return "redirect:/user";
         }
-        return "/";
+        redirectAttributes.addFlashAttribute("message", msgEditSuccessfully);
+        return "redirect:/user";
     }
 }

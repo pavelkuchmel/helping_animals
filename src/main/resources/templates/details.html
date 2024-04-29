@@ -60,7 +60,7 @@
     </table>
     <div class="main-container_menu"
          th:if="${animal.getIncome() != null}">
-        <a class="a_btn_type1" th:href="*{'/id/' + animal.getId + '/dotanions'}"><span th:text="*{'Вы можете помочь' + animal.getGenderSample() + '.'}"></span></a>
+        <a class="a_btn_type1" th:href="*{'/income?id=' + animal.getId}"><span th:text="*{'Вы можете помочь' + animal.getGenderSample() + '.'}"></span></a>
     </div>
 </div>
 <div th:replace="~{footer :: footer}"></div>

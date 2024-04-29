@@ -41,7 +41,7 @@ public class Income implements Serializable {
     @UpdateTimestamp
     private Timestamp updated;
 
-    @OneToMany(mappedBy = "income")
+    @OneToMany(mappedBy = "income", fetch = FetchType.EAGER)
     private List<Animal> animals;
 
     @ManyToOne

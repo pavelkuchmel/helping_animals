@@ -15,7 +15,7 @@
 <h2 style="text-align: center">Проверьте, правильно ли заполнены все поля в вашем профиле, прежде чем отправлять запрос.</h2>
 <form method="post"  role="form" th:action="@{/user/curator-form}" enctype="multipart/form-data">
   <input type="file" th:name="image" accept="img/animals/*" required>
-  <input type="hidden" name="id" th:value="${authorized.getEmail()}">
+  <input type="hidden" name="email" th:value="${authorized.getEmail()}">
   <input type="hidden" name="id" th:value="${authorized.getId()}">
   <button class="a_btn_type1" type="submit">Стать куратором</button>
 </form>

@@ -11,8 +11,11 @@ public class MvcConfig implements WebMvcConfigurer {
     @Value("${photo.animal.directory.upload}")
     private String photoAnimalDirectoryUpload;
 
-    @Value("${passport.animal.directory.upload}")
-    private String passportUserDirectoryUpload;
+    @Value("${passport.user.directory.upload-temp}")
+    private String passportUserDirectoryUploadTemp;
+
+    @Value("${passport.user.directory.upload-const}")
+    private String passportUserDirectoryUploadConst;
 
     @Value("${photo.animal.directory.upload}")
     private String qrAnimalDirectoryUpload;
@@ -22,7 +25,9 @@ public class MvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("file:/" + photoAnimalDirectoryUpload + "/");
         registry.addResourceHandler("/img/qr/**")
                 .addResourceLocations("file:/" + qrAnimalDirectoryUpload + "/");
-        registry.addResourceHandler("/img/passports/**")
-                .addResourceLocations("file:/" + passportUserDirectoryUpload + "/");
+        registry.addResourceHandler("/img/passports/temp")
+                .addResourceLocations("file:/" + passportUserDirectoryUploadTemp + "/");
+        registry.addResourceHandler("/img/passports/const")
+                .addResourceLocations("file:/" + passportUserDirectoryUploadConst + "/");
     }
 }
